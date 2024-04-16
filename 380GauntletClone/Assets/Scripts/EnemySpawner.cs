@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    /*
     public GameObject prefabTest;
     public GameObject prefabTestLVL2;
     public GameObject prefabTestLVL3;
@@ -64,7 +65,11 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    /*
+    public void DestroySpawner()
+    {
+        this.gameObject.SetActive(false);
+    }
+   
 
     public void spawnBone(int eLevel)
     {
@@ -72,9 +77,7 @@ public class EnemySpawner : MonoBehaviour
     }
     */
 
-    public void DestroySpawner()
-    {
-        this.gameObject.SetActive(false);
-    }
+
+
 
 }
