@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,15 +11,17 @@ public class PlayerMovement : MonoBehaviour
     public float moveDirHor;
     public float moveDirVer;
 
-    public int playerAttackDamage;
     public int health;
     public int playerArmor;
     public bool hasArmor;
+
+    public GameObject projectilePrefab;
     public int playerAttackRange;
+    public int playerAttackDamage;
     // Start is called before the first frame update
     void Start()
     {
-
+        playerSpeed = 5f;
     }
 
     // Update is called once per frame
@@ -37,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        if (Input.GetKey("space"))
+        {
+            Attack();
+        }
     }
 
     public virtual void Move()
@@ -46,6 +53,6 @@ public class PlayerMovement : MonoBehaviour
 
     public virtual void Attack()
     {
-
+        Instantiate(projectilePrefab, transform.position, transform.rotation);
     }
 }
