@@ -2,8 +2,57 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
+{
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    [SerializeField] private float playerSpeed = 4.0f;
+
+    public GameObject projectilePrefab;
+    private bool playerAttacked;
+
+    public int health;
+    public int playerArmor;
+    public bool hasArmor;
+
+    private Vector2 movementInput = Vector2.zero;
+
+    private void Start()
+    {
+        controller = gameObject.GetComponent<CharacterController>();
+    }
+
+    void Update()
+    {
+
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        controller.Move(playerVelocity * Time.deltaTime);
+
+        if (playerAttacked)
+        {
+            Debug.Log("player shot projectile");
+            Instantiate(projectilePrefab, transform.position, transform.rotation);
+        }
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        movementInput = context.ReadValue<Vector2>();
+    }
+    public void Attack(InputAction.CallbackContext context)
+    {
+        playerAttacked = context.ReadValue<bool>();
+        playerAttacked = context.action.triggered;
+        //Instantiate(projectilePrefab, transform.position, transform.rotation);
+    }
+
+}
+/*public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public float playerSpeed = 5f;
@@ -55,4 +104,4 @@ public class PlayerMovement : MonoBehaviour
     {
         Instantiate(projectilePrefab, transform.position, transform.rotation);
     }
-}
+}*/

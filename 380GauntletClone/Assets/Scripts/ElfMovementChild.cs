@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElfMovementChild : PlayerMovement
 {
-    // Start is called before the first frame update
+   /* // Start is called before the first frame update
     void Start()
     {
         playerSpeed = 15f;
@@ -22,5 +22,5 @@ public class ElfMovementChild : PlayerMovement
 
         base.Move();
         
-    }
+    }*/
 }

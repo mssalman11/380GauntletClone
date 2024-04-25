@@ -28,7 +28,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             ""id"": ""1d218916-5e0b-4345-a40e-5da331d13bc9"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""36c3674d-f26d-49ce-a94c-1aeca5fd52ce"",
                     ""expectedControlType"": ""Vector2"",
@@ -39,13 +39,13 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""WASD"",
                     ""id"": ""f907630f-f80a-4ea4-ada6-6d6a38fb8954"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Movement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -55,8 +55,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -66,8 +66,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -77,8 +77,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -88,19 +88,128 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""ArrowKeys"",
+                    ""id"": ""f11473cd-18d5-4aea-9cf0-9d4e784d9627"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8349917a-562d-4439-8f82-57c8ff3df00d"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ArrowKey"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f17a8226-dd36-472a-888f-fad6818f187b"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ArrowKey"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6f8840af-8888-4cff-83c3-ca080e5b0430"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ArrowKey"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""fe6d15c4-2012-4daa-860c-17ed1a0fa929"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ArrowKey"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Attack"",
+            ""id"": ""6ed3aaa8-c3c5-4804-b61a-8a4d4b49494b"",
+            ""actions"": [
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf80549a-c572-448b-88fc-57e82b3dc3c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8490218f-326c-49dd-a2b9-7f9a9b3d8433"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""ArrowKey"",
+            ""bindingGroup"": ""ArrowKey"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Move
         m_Move = asset.FindActionMap("Move", throwIfNotFound: true);
-        m_Move_Newaction = m_Move.FindAction("New action", throwIfNotFound: true);
+        m_Move_Movement = m_Move.FindAction("Movement", throwIfNotFound: true);
+        // Attack
+        m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
+        m_Attack_Attack = m_Attack.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,12 +271,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     // Move
     private readonly InputActionMap m_Move;
     private List<IMoveActions> m_MoveActionsCallbackInterfaces = new List<IMoveActions>();
-    private readonly InputAction m_Move_Newaction;
+    private readonly InputAction m_Move_Movement;
     public struct MoveActions
     {
         private @PlayerInputs m_Wrapper;
         public MoveActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Move_Newaction;
+        public InputAction @Movement => m_Wrapper.m_Move_Movement;
         public InputActionMap Get() { return m_Wrapper.m_Move; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -177,16 +286,16 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MoveActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MoveActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
         }
 
         private void UnregisterCallbacks(IMoveActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
         }
 
         public void RemoveCallbacks(IMoveActions instance)
@@ -204,8 +313,76 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         }
     }
     public MoveActions @Move => new MoveActions(this);
+
+    // Attack
+    private readonly InputActionMap m_Attack;
+    private List<IAttackActions> m_AttackActionsCallbackInterfaces = new List<IAttackActions>();
+    private readonly InputAction m_Attack_Attack;
+    public struct AttackActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public AttackActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Attack => m_Wrapper.m_Attack_Attack;
+        public InputActionMap Get() { return m_Wrapper.m_Attack; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AttackActions set) { return set.Get(); }
+        public void AddCallbacks(IAttackActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AttackActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AttackActionsCallbackInterfaces.Add(instance);
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+        }
+
+        private void UnregisterCallbacks(IAttackActions instance)
+        {
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+        }
+
+        public void RemoveCallbacks(IAttackActions instance)
+        {
+            if (m_Wrapper.m_AttackActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IAttackActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AttackActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AttackActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public AttackActions @Attack => new AttackActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_ArrowKeySchemeIndex = -1;
+    public InputControlScheme ArrowKeyScheme
+    {
+        get
+        {
+            if (m_ArrowKeySchemeIndex == -1) m_ArrowKeySchemeIndex = asset.FindControlSchemeIndex("ArrowKey");
+            return asset.controlSchemes[m_ArrowKeySchemeIndex];
+        }
+    }
     public interface IMoveActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface IAttackActions
+    {
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
