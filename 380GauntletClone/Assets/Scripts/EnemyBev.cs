@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyBev : MonoBehaviour
 {
+    [SerializeField]
     protected int enemyHealth;
     protected int enemyLevel;
     protected int enemyDamage;
@@ -12,7 +13,16 @@ public class EnemyBev : MonoBehaviour
     private float speed;
 
     public GameObject TESTPLAYER;
+    public bool test;
     public Vector3 distance;
+
+    private void FixedUpdate()
+    {
+        if (test)
+        {
+            EnemyMove();
+        }
+    }
 
     public virtual void EnemyMove()
     {
