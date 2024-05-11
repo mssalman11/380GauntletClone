@@ -125,6 +125,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5191cdf0-63c9-4e93-bbd5-a4f981f58afe",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -153,6 +164,56 @@
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4060451-dcff-4018-a17d-f49b213c0778",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Join",
+            "id": "29ad5aa8-2797-4cc4-b7cd-65b5d91606c4",
+            "actions": [
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "e6d31ec3-a1fc-47cb-9d0b-4251cb2fc948",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6c15169b-becc-4094-91ab-3986533df629",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15d896ce-7eab-42f7-b470-417ed19b95ae",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -175,6 +236,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Controller1",
+            "bindingGroup": "Controller1",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": true,
                     "isOR": false
                 }

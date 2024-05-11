@@ -20,9 +20,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movementInput = Vector2.zero;
 
-    private void Start()
+   
+    private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        CameraMovement.targets.Add(this.transform);
     }
 
     void Update()

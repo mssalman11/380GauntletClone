@@ -147,6 +147,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5191cdf0-63c9-4e93-bbd5-a4f981f58afe"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -175,6 +186,56 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4060451-dcff-4018-a17d-f49b213c0778"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Join"",
+            ""id"": ""29ad5aa8-2797-4cc4-b7cd-65b5d91606c4"",
+            ""actions"": [
+                {
+                    ""name"": ""Join"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6d31ec3-a1fc-47cb-9d0b-4251cb2fc948"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6c15169b-becc-4094-91ab-3986533df629"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15d896ce-7eab-42f7-b470-417ed19b95ae"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -201,6 +262,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Controller1"",
+            ""bindingGroup"": ""Controller1"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -210,6 +282,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // Attack
         m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
         m_Attack_Attack = m_Attack.FindAction("Attack", throwIfNotFound: true);
+        // Join
+        m_Join = asset.FindActionMap("Join", throwIfNotFound: true);
+        m_Join_Join = m_Join.FindAction("Join", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +434,52 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         }
     }
     public AttackActions @Attack => new AttackActions(this);
+
+    // Join
+    private readonly InputActionMap m_Join;
+    private List<IJoinActions> m_JoinActionsCallbackInterfaces = new List<IJoinActions>();
+    private readonly InputAction m_Join_Join;
+    public struct JoinActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public JoinActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Join => m_Wrapper.m_Join_Join;
+        public InputActionMap Get() { return m_Wrapper.m_Join; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(JoinActions set) { return set.Get(); }
+        public void AddCallbacks(IJoinActions instance)
+        {
+            if (instance == null || m_Wrapper.m_JoinActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_JoinActionsCallbackInterfaces.Add(instance);
+            @Join.started += instance.OnJoin;
+            @Join.performed += instance.OnJoin;
+            @Join.canceled += instance.OnJoin;
+        }
+
+        private void UnregisterCallbacks(IJoinActions instance)
+        {
+            @Join.started -= instance.OnJoin;
+            @Join.performed -= instance.OnJoin;
+            @Join.canceled -= instance.OnJoin;
+        }
+
+        public void RemoveCallbacks(IJoinActions instance)
+        {
+            if (m_Wrapper.m_JoinActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IJoinActions instance)
+        {
+            foreach (var item in m_Wrapper.m_JoinActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_JoinActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public JoinActions @Join => new JoinActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -377,6 +498,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_ArrowKeySchemeIndex];
         }
     }
+    private int m_Controller1SchemeIndex = -1;
+    public InputControlScheme Controller1Scheme
+    {
+        get
+        {
+            if (m_Controller1SchemeIndex == -1) m_Controller1SchemeIndex = asset.FindControlSchemeIndex("Controller1");
+            return asset.controlSchemes[m_Controller1SchemeIndex];
+        }
+    }
     public interface IMoveActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -384,5 +514,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IAttackActions
     {
         void OnAttack(InputAction.CallbackContext context);
+    }
+    public interface IJoinActions
+    {
+        void OnJoin(InputAction.CallbackContext context);
     }
 }
