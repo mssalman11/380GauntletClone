@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6438615144534501563}
   - component: {fileID: 8433807476870909655}
   - component: {fileID: 8131462717054123453}
-  - component: {fileID: -6741642143179010114}
+  - component: {fileID: -4673383919910041780}
   m_Layer: 0
   m_Name: Warrior Prefab
   m_TagString: Untagged
@@ -209,14 +209,14 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-6741642143179010114
+  m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!54 &-4673383919910041780
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,5 +241,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0

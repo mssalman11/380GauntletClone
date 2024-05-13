@@ -144,7 +144,7 @@
             "id": "6ed3aaa8-c3c5-4804-b61a-8a4d4b49494b",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "PlayerAttack",
                     "type": "Button",
                     "id": "bf80549a-c572-448b-88fc-57e82b3dc3c1",
                     "expectedControlType": "Button",
@@ -161,7 +161,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Attack",
+                    "action": "PlayerAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -172,7 +172,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller1",
-                    "action": "Attack",
+                    "action": "PlayerAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

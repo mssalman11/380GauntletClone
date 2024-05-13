@@ -13,97 +13,80 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject projectilePrefab;
     private bool playerAttacked;
+    private Vector3 projectileOffset;
+    private float projectileSpeed;
 
     public int health;
     public int playerArmor;
     public bool hasArmor;
 
     private Vector2 movementInput = Vector2.zero;
+    public PlayerInputs playerInput;
 
-   
+    private Vector3 move;
+    private Vector3 shootDirection;
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
         CameraMovement.targets.Add(this.transform);
+        playerInput = new PlayerInputs();
+
+        playerInput.Enable();
+
+        
+        projectileSpeed = 10f;
     }
 
     void Update()
     {
+        playerInput.Attack.PlayerAttack.performed += OnAttack;
+        
+        move = new Vector3(movementInput.x, 0, movementInput.y);
 
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        if (move != Vector3.zero)
+        {
+            shootDirection = move;
+        }
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if (playerAttacked)
-        {
-            Debug.Log("player shot projectile");
-            Instantiate(projectilePrefab, transform.position, transform.rotation);
-        }
+        FreezeYPosition();
+
     }
 
+    private void FreezeYPosition()
+    {
+        Vector3 currentPosition = transform.position;
+
+        currentPosition.y = 1.25f;
+
+        transform.position = currentPosition;
+    }    
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
     }
-    public void Attack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        playerAttacked = context.ReadValue<bool>();
-        playerAttacked = context.action.triggered;
-        //Instantiate(projectilePrefab, transform.position, transform.rotation);
+        Debug.Log("Attacked");
+
+        ShootProjectile(shootDirection);
     }
 
+    private void ShootProjectile(Vector3 direction)
+    {
+        projectileOffset = transform.position + shootDirection;
+        GameObject projectile = Instantiate(projectilePrefab, projectileOffset, transform.rotation);
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+        projectileRB.velocity = direction * projectileSpeed;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Died");
+        }
+    }
 }
-/*public class PlayerMovement : MonoBehaviour
-{
-    public Rigidbody rb;
-    public float playerSpeed = 5f;
 
-    public float moveDirHor;
-    public float moveDirVer;
-
-    public int health;
-    public int playerArmor;
-    public bool hasArmor;
-
-    public GameObject projectilePrefab;
-    public int playerAttackRange;
-    public int playerAttackDamage;
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerSpeed = 5f;
-    }
-
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        moveDirHor = Input.GetAxisRaw("Horizontal");
-        moveDirVer = Input.GetAxisRaw("Vertical");
-
-        if(moveDirVer != 0 || moveDirHor != 0)
-        {
-            Move();
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-
-        }
-
-        if (Input.GetKey("space"))
-        {
-            Attack();
-        }
-    }
-
-    public virtual void Move()
-    {
-        rb.velocity = new Vector3(moveDirHor * playerSpeed, rb.velocity.y, moveDirVer * playerSpeed);
-    }
-
-    public virtual void Attack()
-    {
-        Instantiate(projectilePrefab, transform.position, transform.rotation);
-    }
-}*/

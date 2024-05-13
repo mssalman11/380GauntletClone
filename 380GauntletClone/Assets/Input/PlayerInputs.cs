@@ -166,7 +166,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             ""id"": ""6ed3aaa8-c3c5-4804-b61a-8a4d4b49494b"",
             ""actions"": [
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""PlayerAttack"",
                     ""type"": ""Button"",
                     ""id"": ""bf80549a-c572-448b-88fc-57e82b3dc3c1"",
                     ""expectedControlType"": ""Button"",
@@ -183,7 +183,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Attack"",
+                    ""action"": ""PlayerAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -194,7 +194,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller1"",
-                    ""action"": ""Attack"",
+                    ""action"": ""PlayerAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -310,7 +310,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Move_Movement = m_Move.FindAction("Movement", throwIfNotFound: true);
         // Attack
         m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
-        m_Attack_Attack = m_Attack.FindAction("Attack", throwIfNotFound: true);
+        m_Attack_PlayerAttack = m_Attack.FindAction("PlayerAttack", throwIfNotFound: true);
         // Join
         m_Join = asset.FindActionMap("Join", throwIfNotFound: true);
         m_Join_WASDJoin = m_Join.FindAction("WASDJoin", throwIfNotFound: true);
@@ -423,12 +423,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     // Attack
     private readonly InputActionMap m_Attack;
     private List<IAttackActions> m_AttackActionsCallbackInterfaces = new List<IAttackActions>();
-    private readonly InputAction m_Attack_Attack;
+    private readonly InputAction m_Attack_PlayerAttack;
     public struct AttackActions
     {
         private @PlayerInputs m_Wrapper;
         public AttackActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Attack => m_Wrapper.m_Attack_Attack;
+        public InputAction @PlayerAttack => m_Wrapper.m_Attack_PlayerAttack;
         public InputActionMap Get() { return m_Wrapper.m_Attack; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -438,16 +438,16 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_AttackActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_AttackActionsCallbackInterfaces.Add(instance);
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
+            @PlayerAttack.started += instance.OnPlayerAttack;
+            @PlayerAttack.performed += instance.OnPlayerAttack;
+            @PlayerAttack.canceled += instance.OnPlayerAttack;
         }
 
         private void UnregisterCallbacks(IAttackActions instance)
         {
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
+            @PlayerAttack.started -= instance.OnPlayerAttack;
+            @PlayerAttack.performed -= instance.OnPlayerAttack;
+            @PlayerAttack.canceled -= instance.OnPlayerAttack;
         }
 
         public void RemoveCallbacks(IAttackActions instance)
@@ -560,7 +560,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     }
     public interface IAttackActions
     {
-        void OnAttack(InputAction.CallbackContext context);
+        void OnPlayerAttack(InputAction.CallbackContext context);
     }
     public interface IJoinActions
     {
