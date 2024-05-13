@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4810006516271419895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.279, z: -1.7200003}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,6 +83,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bf80549a-c572-448b-88fc-57e82b3dc3c1
     m_ActionName: Attack/Attack[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6d31ec3-a1fc-47cb-9d0b-4251cb2fc948
+    m_ActionName: Join/Join[/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Move

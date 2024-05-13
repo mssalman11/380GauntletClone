@@ -6,12 +6,12 @@ public class CameraMovement : MonoBehaviour
 {
     public static List<Transform> targets;
 
-    public Vector3 offset;
-    public Vector3 newPosition;
-    public Vector3 centerPoint;
+    private Vector3 offset;
+    private Vector3 newPosition;
+    private Vector3 centerPoint;
     private void Awake()
     {
-        offset = Vector3.up;
+        offset = new Vector3(5f, 1.5f, 0f);
 
         targets = new List<Transform>();
     }
