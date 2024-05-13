@@ -5,27 +5,67 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpawning : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private bool spawnedPlayerTwo;
-    [SerializeField] private bool spawnedPlayerThree;
-    // Start is called before the first frame update
-    void Start()
+    //public PlayerInputManager inputManager;
+    //[SerializeField] private GameObject currentPrefab;
+    [SerializeField] private GameObject warriorPrefab;
+    [SerializeField] private GameObject valkyriePrefab;
+    [SerializeField] private GameObject wizardPrefab;
+    [SerializeField] private GameObject elfPrefab;
+
+    public PlayerInputs playerInput;
+
+    [SerializeField] private bool warriorJoined;
+    [SerializeField] private bool valkyrieJoined;
+    [SerializeField] private bool wizardJoined;
+    [SerializeField] private bool elfJoined;
+
+    private void Awake()
     {
-        spawnedPlayerTwo = false;
+        playerInput = new PlayerInputs();
+    }
+
+    private void OnEnable()
+    {
+        playerInput.Enable();
     }
 
 
     void Update()
     {
-        if (!spawnedPlayerTwo)
+        playerInput.Join.WASDJoin.performed += WASDJoinPerformed;
+
+        playerInput.Join.ArrowJoin.performed += ArrowJoinPerformed;
+        
+        playerInput.Join.GP1Join.performed += GP1JoinPerformed;
+
+    }
+
+
+    private void WASDJoinPerformed(InputAction.CallbackContext context)
+    {
+        if (!warriorJoined)
         {
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
-            {
-                spawnedPlayerTwo = true;
-                var player2 = PlayerInput.Instantiate(playerPrefab, controlScheme: "ArrowKey", pairWithDevice: Keyboard.current);
-                //CameraMovement.targets.Add(player2.transform);
-            }
+            warriorJoined = true;
+            PlayerInput.Instantiate(warriorPrefab, controlScheme: "Keyboard", pairWithDevice: Keyboard.current);
+        }
+
+    }
+
+    private void ArrowJoinPerformed(InputAction.CallbackContext context)
+    {
+        if (!valkyrieJoined)
+        {
+            valkyrieJoined = true;
+            PlayerInput.Instantiate(valkyriePrefab, controlScheme: "ArrowKey", pairWithDevice: Keyboard.current);
         }
     }
 
+    private void GP1JoinPerformed(InputAction.CallbackContext context)
+    {
+        if (!wizardJoined)
+        {
+            wizardJoined = true;
+            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: Gamepad.current);
+        }
+    }
 }

@@ -183,9 +183,27 @@
             "id": "29ad5aa8-2797-4cc4-b7cd-65b5d91606c4",
             "actions": [
                 {
-                    "name": "Join",
+                    "name": "WASDJoin",
                     "type": "Button",
                     "id": "e6d31ec3-a1fc-47cb-9d0b-4251cb2fc948",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowJoin",
+                    "type": "Button",
+                    "id": "de375a30-2de8-4ab5-b1f4-76a692de42d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GP1Join",
+                    "type": "Button",
+                    "id": "ef574918-015e-4db0-9800-88c4332e705b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -195,23 +213,34 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "6c15169b-becc-4094-91ab-3986533df629",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller1",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "15d896ce-7eab-42f7-b470-417ed19b95ae",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Join",
+                    "action": "WASDJoin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8115b66e-3166-4369-8c12-5b90addc8c08",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ArrowKey",
+                    "action": "ArrowJoin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee448626-2580-4cac-87e9-2369fd3e93dc",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller1",
+                    "action": "GP1Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

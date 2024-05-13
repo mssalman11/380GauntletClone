@@ -205,9 +205,27 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             ""id"": ""29ad5aa8-2797-4cc4-b7cd-65b5d91606c4"",
             ""actions"": [
                 {
-                    ""name"": ""Join"",
+                    ""name"": ""WASDJoin"",
                     ""type"": ""Button"",
                     ""id"": ""e6d31ec3-a1fc-47cb-9d0b-4251cb2fc948"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArrowJoin"",
+                    ""type"": ""Button"",
+                    ""id"": ""de375a30-2de8-4ab5-b1f4-76a692de42d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GP1Join"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef574918-015e-4db0-9800-88c4332e705b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -217,23 +235,34 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""6c15169b-becc-4094-91ab-3986533df629"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller1"",
-                    ""action"": ""Join"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""15d896ce-7eab-42f7-b470-417ed19b95ae"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Join"",
+                    ""action"": ""WASDJoin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8115b66e-3166-4369-8c12-5b90addc8c08"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ArrowKey"",
+                    ""action"": ""ArrowJoin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee448626-2580-4cac-87e9-2369fd3e93dc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""GP1Join"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -284,7 +313,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Attack_Attack = m_Attack.FindAction("Attack", throwIfNotFound: true);
         // Join
         m_Join = asset.FindActionMap("Join", throwIfNotFound: true);
-        m_Join_Join = m_Join.FindAction("Join", throwIfNotFound: true);
+        m_Join_WASDJoin = m_Join.FindAction("WASDJoin", throwIfNotFound: true);
+        m_Join_ArrowJoin = m_Join.FindAction("ArrowJoin", throwIfNotFound: true);
+        m_Join_GP1Join = m_Join.FindAction("GP1Join", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,12 +469,16 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     // Join
     private readonly InputActionMap m_Join;
     private List<IJoinActions> m_JoinActionsCallbackInterfaces = new List<IJoinActions>();
-    private readonly InputAction m_Join_Join;
+    private readonly InputAction m_Join_WASDJoin;
+    private readonly InputAction m_Join_ArrowJoin;
+    private readonly InputAction m_Join_GP1Join;
     public struct JoinActions
     {
         private @PlayerInputs m_Wrapper;
         public JoinActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Join => m_Wrapper.m_Join_Join;
+        public InputAction @WASDJoin => m_Wrapper.m_Join_WASDJoin;
+        public InputAction @ArrowJoin => m_Wrapper.m_Join_ArrowJoin;
+        public InputAction @GP1Join => m_Wrapper.m_Join_GP1Join;
         public InputActionMap Get() { return m_Wrapper.m_Join; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -453,16 +488,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_JoinActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_JoinActionsCallbackInterfaces.Add(instance);
-            @Join.started += instance.OnJoin;
-            @Join.performed += instance.OnJoin;
-            @Join.canceled += instance.OnJoin;
+            @WASDJoin.started += instance.OnWASDJoin;
+            @WASDJoin.performed += instance.OnWASDJoin;
+            @WASDJoin.canceled += instance.OnWASDJoin;
+            @ArrowJoin.started += instance.OnArrowJoin;
+            @ArrowJoin.performed += instance.OnArrowJoin;
+            @ArrowJoin.canceled += instance.OnArrowJoin;
+            @GP1Join.started += instance.OnGP1Join;
+            @GP1Join.performed += instance.OnGP1Join;
+            @GP1Join.canceled += instance.OnGP1Join;
         }
 
         private void UnregisterCallbacks(IJoinActions instance)
         {
-            @Join.started -= instance.OnJoin;
-            @Join.performed -= instance.OnJoin;
-            @Join.canceled -= instance.OnJoin;
+            @WASDJoin.started -= instance.OnWASDJoin;
+            @WASDJoin.performed -= instance.OnWASDJoin;
+            @WASDJoin.canceled -= instance.OnWASDJoin;
+            @ArrowJoin.started -= instance.OnArrowJoin;
+            @ArrowJoin.performed -= instance.OnArrowJoin;
+            @ArrowJoin.canceled -= instance.OnArrowJoin;
+            @GP1Join.started -= instance.OnGP1Join;
+            @GP1Join.performed -= instance.OnGP1Join;
+            @GP1Join.canceled -= instance.OnGP1Join;
         }
 
         public void RemoveCallbacks(IJoinActions instance)
@@ -517,6 +564,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     }
     public interface IJoinActions
     {
-        void OnJoin(InputAction.CallbackContext context);
+        void OnWASDJoin(InputAction.CallbackContext context);
+        void OnArrowJoin(InputAction.CallbackContext context);
+        void OnGP1Join(InputAction.CallbackContext context);
     }
 }
