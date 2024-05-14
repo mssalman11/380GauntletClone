@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//this script keeps the player(s) centered within the camera.
 public class CameraMovement : MonoBehaviour
 {
     public static List<Transform> targets;
@@ -27,6 +27,7 @@ public class CameraMovement : MonoBehaviour
         transform.position = newPosition;
     }
 
+    //averages the position of the players
     Vector3 GetCenterPoint()
     {
         if (targets.Count == 1)

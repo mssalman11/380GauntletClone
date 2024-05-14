@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+//This script is in charge of player movement, interactions, and shooting.
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : PlayerSubject
 {
@@ -37,14 +37,18 @@ public class PlayerMovement : PlayerSubject
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
     public string characterName;
+
+
     private void Awake()
     {
+        //This code adds the player's transform to the camera movement list so that it is tracked by the camera, regardless of how many players there are on screen.
         controller = gameObject.GetComponent<CharacterController>();
         CameraMovement.targets.Add(this.transform);
         playerInput = new PlayerInputs();
 
         projectileSpeed = 10f;
         
+        //Starts health timer, and connects health text to the health UI
         health = 600;
         StartCoroutine(DecreaseHealth());
         playerHealth = GameObject.Find(characterName + " Health");
@@ -52,6 +56,7 @@ public class PlayerMovement : PlayerSubject
         playerJoin = GameObject.Find(characterName + " Join");
         playerJoin.SetActive(false);
 
+        //connects score text to score UI
         playerScore = GameObject.Find(characterName + " Score");
         scoreText = playerScore.GetComponentInChildren<TextMeshProUGUI>();
         canShoot = true;
@@ -66,26 +71,43 @@ public class PlayerMovement : PlayerSubject
     {
         playerInput.Disable();
     }
+
     void Update()
     {
+        //constantly updates score
         SetScore();
+        
+        //creates movement direction based on input
         move = new Vector3(movementInput.x, 0, movementInput.y);
 
+        //if the player has moved, it sets the latest movement direction to the shooting direction
         if (move != Vector3.zero)
         {
             shootDirection = move.normalized;
         }
-        controller.Move(move * Time.deltaTime * playerSpeed);
 
+        //moves player
+        controller.Move(move * Time.deltaTime * playerSpeed);
         controller.Move(playerVelocity * Time.deltaTime);
 
+        //keeps y position locked so the player does not begin floating and avoid interactionss
         FreezeYPosition();
 
         UpdateHUDText();
 
+        if (health < 0)
+        {
+            Die();
+        }
+
     }
 
+    private void Die()
+    {
+        Destroy(this.gameObject);
+    }
     
+    //Health timer decrease
     private IEnumerator DecreaseHealth()
     {
         while (health > 0)
@@ -94,6 +116,7 @@ public class PlayerMovement : PlayerSubject
             health--;
         }
     }
+
     private void FreezeYPosition()
     {
         Vector3 currentPosition = transform.position;
@@ -101,17 +124,21 @@ public class PlayerMovement : PlayerSubject
         currentPosition.y = 0.45f;
 
         transform.position = currentPosition;
-    }    
+    }   
+    //if the player does move input, read the values that the player is inputting and send it to a vector variable
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
     }
+    
+    //if the player inputs shoot, they will attack if they are off cooldown
     public void OnPlayerAttack(InputAction.CallbackContext context)
     {
         if (canShoot)
             SpawnProj(shootDirection);
     }
 
+    //spawns projectile prefab and shoots it in the direction of the latest player movement
     private void SpawnProj(Vector3 direction)
     {
         StartCoroutine(playerShoot());
@@ -121,12 +148,14 @@ public class PlayerMovement : PlayerSubject
         projectileRB.velocity = direction * projectileSpeed;
     }
 
+    //cooldown for player shooting
     private IEnumerator playerShoot()
     {
         canShoot = false;
         yield return new WaitForSeconds(0.5f);
         canShoot = true;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Grunt")
@@ -166,8 +195,19 @@ public class PlayerMovement : PlayerSubject
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+
+        if (collision.gameObject.tag == "Treasure")
+        {
+            addScore(1000);
+        }
     }
 
+    private void SceneSwitcher()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    //if the player has a certain character name, the score is set by the related static variable
     private void SetScore()
     {
         if (characterName == "Warrior")
@@ -179,6 +219,8 @@ public class PlayerMovement : PlayerSubject
         if (characterName == "Elf")
             score = PlayerScores.ElfScore;
     }
+
+    //adds score to correct static variable
     private void addScore(int scoreAdded)
     {
         if (characterName == "Warrior")
@@ -190,6 +232,7 @@ public class PlayerMovement : PlayerSubject
         if (characterName == "Elf")
             PlayerScores.ElfScore += scoreAdded;
     }
+
     void UpdateHUDText()
     {
         scoreText.text = score.ToString();

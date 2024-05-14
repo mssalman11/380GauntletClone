@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+//this script assigns movement to each different character.
 public class PlayerSpawning : MonoBehaviour
 {
     [SerializeField] private GameObject warriorPrefab;
@@ -17,35 +17,31 @@ public class PlayerSpawning : MonoBehaviour
     [SerializeField] private bool wizardJoined;
     [SerializeField] private bool elfJoined;
 
-    private Gamepad xboxController;
-    private Gamepad playstationController;
+    private Gamepad controller1;
+    private Gamepad controller2;
     private void Awake()
     {
         playerInput = new PlayerInputs();
 
-        xboxController = FindXboxController();
-        playstationController = FindPlaystationController();
+        FindController();
     }
 
-    private Gamepad FindXboxController()
+    private Gamepad FindController()
     {
         foreach (var device in Gamepad.all)
         {
-            if (device.name.Contains("Xbox"))
-                return device;
+            if (wizardJoined)
+            {
+                controller2 = device;
+            }
+            else
+            {
+                controller1 = device;
+            }
+        }
+        return null;
+    }
 
-        }
-        return null;
-    }
-    private Gamepad FindPlaystationController()
-    {
-        foreach (var device in Gamepad.all)
-        {
-            if (!device.name.Contains("Xbox"))
-                return device;
-        }
-        return null;
-    }
     private void OnEnable()
     {
         playerInput.Enable();
@@ -64,7 +60,7 @@ public class PlayerSpawning : MonoBehaviour
 
     }
 
-
+    //if the character has not joined, then join with these device inputs
     private void WASDJoinPerformed(InputAction.CallbackContext context)
     {
         if (!warriorJoined)
@@ -75,6 +71,7 @@ public class PlayerSpawning : MonoBehaviour
 
     }
 
+    //if the character has not joined, then join with these device inputs
     private void ArrowJoinPerformed(InputAction.CallbackContext context)
     {
         if (!valkyrieJoined)
@@ -84,20 +81,23 @@ public class PlayerSpawning : MonoBehaviour
         }
     }
 
+    //if the character has not joined, then join with these device inputs
     private void GP1JoinPerformed(InputAction.CallbackContext context)
     {
         if (!wizardJoined)
         {
             wizardJoined = true;
-            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: playstationController);
+            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: controller1);
         }
     }
+
+    //if the character has not joined, then join with these device inputs
     private void GP2JoinPerformed(InputAction.CallbackContext context)
     {
-        if (!wizardJoined)
+        if (!elfJoined)
         {
-            wizardJoined = true;
-            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: xboxController);
+            elfJoined = true;
+            PlayerInput.Instantiate(elfPrefab, controlScheme: "Controller2", pairWithDevice: controller2);
         }
     }
 }

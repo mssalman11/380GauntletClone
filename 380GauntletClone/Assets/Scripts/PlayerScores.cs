@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//This script creates static variables for scores to be referenced to for each player.
 public class PlayerScores : MonoBehaviour
 {
     public static int WarriorScore;
