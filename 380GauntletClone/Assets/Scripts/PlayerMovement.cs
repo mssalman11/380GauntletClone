@@ -146,7 +146,7 @@ public class PlayerMovement : PlayerSubject
             keys += 1;
             addScore(100);
             Destroy(collision.gameObject);
-            NotifyObserver(PlayerActions.gotKey);
+            
         }
         if (collision.gameObject.tag == "Door")
         {

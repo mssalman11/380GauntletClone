@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8433807476870909655}
   - component: {fileID: 8131462717054123453}
   - component: {fileID: -4673383919910041780}
+  - component: {fileID: 169070914270505638}
   m_Layer: 7
   m_Name: Warrior Prefab
   m_TagString: Player
@@ -133,7 +134,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3663770884729502141, guid: 5acf543c885116f498359d19bff3337f,
     type: 3}
   health: 0
-  playerArmor: 0
   hasArmor: 0
   controlSchemeName: Keyboard
   playerHealth: {fileID: 0}
@@ -266,3 +266,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &169070914270505638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4810006516271419895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d66ea5981ab4940a75b4df4bd959f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 20

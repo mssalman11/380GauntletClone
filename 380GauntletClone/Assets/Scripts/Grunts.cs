@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grunts : EnemyBev
 {
-    private void Start()
+    private void Awake()
     {
         enemyHealth = 10;
         TESTPLAYER = FindObjectOfType<Player>().transform;

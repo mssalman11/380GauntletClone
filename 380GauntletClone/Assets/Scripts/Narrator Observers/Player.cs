@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : PlayerSubject
-{
-    int count;
-    public int playerHealth = 20;
-
+{ 
+    public int count = 0;
+    public bool flag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +15,7 @@ public class Player : PlayerSubject
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (flag)
         {
             NotifyObserver(PlayerActions.gotKey);
         }
@@ -36,18 +35,11 @@ public class Player : PlayerSubject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Key"))
         {
-            count++;
-            if (count == 1)
-            {
-                NotifyObserver(PlayerActions.gotHit);
-            }
-        }
-
-        if (collision.gameObject.CompareTag("Grunt"))
-        {
-            playerHealth -= 5;
+            NotifyObserver(PlayerActions.gotKey);
+            flag = true;
         }
     }
+    
 }
