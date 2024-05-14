@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : PlayerSubject
 {
-
     int count;
+    public int playerHealth = 20;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +43,11 @@ public class Player : PlayerSubject
             {
                 NotifyObserver(PlayerActions.gotHit);
             }
-            
+        }
 
+        if (collision.gameObject.CompareTag("Grunt"))
+        {
+            playerHealth -= 5;
         }
     }
 }
