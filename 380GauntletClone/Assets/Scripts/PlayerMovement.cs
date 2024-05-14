@@ -67,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //actions.FindAction("PlayerAttack").ReadValue<bool>();
-        playerInput.Attack.PlayerAttack.performed += OnAttack;
         /*if (playerInput.FindAction("PlayerAttack").triggered)
         {
             SpawnProj(shootDirection);
@@ -110,10 +109,17 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
+        
         if (context.performed)
-            SpawnProj(shootDirection);
+            Debug.Log("Shot");
+        //SpawnProj(shootDirection);
+
     }
 
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        SpawnProj(shootDirection);
+    }
     private void SpawnProj(Vector3 direction)
     {
         projectileOffset = transform.position + shootDirection;
