@@ -17,11 +17,35 @@ public class PlayerSpawning : MonoBehaviour
     [SerializeField] private bool wizardJoined;
     [SerializeField] private bool elfJoined;
 
+    private Gamepad xboxController;
+    private Gamepad playstationController;
     private void Awake()
     {
         playerInput = new PlayerInputs();
+
+        xboxController = FindXboxController();
+        playstationController = FindPlaystationController();
     }
 
+    private Gamepad FindXboxController()
+    {
+        foreach (var device in Gamepad.all)
+        {
+            if (device.name.Contains("Xbox"))
+                return device;
+
+        }
+        return null;
+    }
+    private Gamepad FindPlaystationController()
+    {
+        foreach (var device in Gamepad.all)
+        {
+            if (!device.name.Contains("Xbox"))
+                return device;
+        }
+        return null;
+    }
     private void OnEnable()
     {
         playerInput.Enable();
@@ -35,6 +59,8 @@ public class PlayerSpawning : MonoBehaviour
         playerInput.Join.ArrowJoin.performed += ArrowJoinPerformed;
         
         playerInput.Join.GP1Join.performed += GP1JoinPerformed;
+
+        playerInput.Join.GP2Join.performed += GP2JoinPerformed;
 
     }
 
@@ -63,7 +89,15 @@ public class PlayerSpawning : MonoBehaviour
         if (!wizardJoined)
         {
             wizardJoined = true;
-            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: Gamepad.current);
+            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: playstationController);
+        }
+    }
+    private void GP2JoinPerformed(InputAction.CallbackContext context)
+    {
+        if (!wizardJoined)
+        {
+            wizardJoined = true;
+            PlayerInput.Instantiate(wizardPrefab, controlScheme: "Controller1", pairWithDevice: xboxController);
         }
     }
 }

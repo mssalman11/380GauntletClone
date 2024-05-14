@@ -21,9 +21,11 @@ public class PlayerMovement : MonoBehaviour
     private int score;
     public int playerArmor;
     public bool hasArmor;
+    private int keys;
 
     private Vector2 movementInput = Vector2.zero;
-    public PlayerInputs playerInput;
+    private PlayerInputs playerInput;
+    private InputActionAsset actions;
     public string controlSchemeName;
 
     private Vector3 move;
@@ -41,13 +43,16 @@ public class PlayerMovement : MonoBehaviour
         CameraMovement.targets.Add(this.transform);
         playerInput = new PlayerInputs();
 
-        //playerInput.asset.FindActionMap(controlSchemeName).Enable();
+        //actions = GetComponent<PlayerInput>().actions;
+
         projectileSpeed = 10f;
         
         health = 600;
         StartCoroutine(DecreaseHealth());
         playerHealth = GameObject.Find(characterName + " Health");
         healthText = playerHealth.GetComponentInChildren<TextMeshProUGUI>();
+        playerJoin = GameObject.Find(characterName + " Join");
+        playerJoin.SetActive(false);
     }
 
     private void OnEnable()
@@ -61,14 +66,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-
+        //actions.FindAction("PlayerAttack").ReadValue<bool>();
         playerInput.Attack.PlayerAttack.performed += OnAttack;
-        
+        /*if (playerInput.FindAction("PlayerAttack").triggered)
+        {
+            SpawnProj(shootDirection);
+        }*/
         move = new Vector3(movementInput.x, 0, movementInput.y);
 
         if (move != Vector3.zero)
         {
-            shootDirection = move;
+            shootDirection = move.normalized;
         }
         controller.Move(move * Time.deltaTime * playerSpeed);
 
@@ -102,10 +110,11 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-        ShootProjectile(shootDirection);
+        if (context.performed)
+            SpawnProj(shootDirection);
     }
 
-    private void ShootProjectile(Vector3 direction)
+    private void SpawnProj(Vector3 direction)
     {
         projectileOffset = transform.position + shootDirection;
         GameObject projectile = Instantiate(projectilePrefab, projectileOffset, transform.rotation);
@@ -118,6 +127,19 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Hit By Enemy");
             health -= 5;
+        }
+        if (collision.gameObject.tag == "Key")
+        {
+            keys += 1;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Door")
+        {
+            if (keys > 0)
+            {
+                keys -= 1;
+                Destroy(collision.gameObject);
+            }
         }
     }
 

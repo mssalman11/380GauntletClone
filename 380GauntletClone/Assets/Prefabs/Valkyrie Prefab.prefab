@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8433807476870909655}
   - component: {fileID: 8131462717054123453}
   - component: {fileID: 3869037693486151047}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Valkyrie Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ef574918-015e-4db0-9800-88c4332e705b
     m_ActionName: Join/GP1Join[/XInputControllerWindows/buttonSouth,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2aa0f9f-73e6-459c-81be-f8869276cb8e
+    m_ActionName: Join/GP2Join[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: ArrowKey
   m_DefaultActionMap: Move
@@ -113,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c64968e68273c2409c3013006af3a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 4
+  playerSpeed: 6
   projectilePrefab: {fileID: 3663770884729502141, guid: 11f024d92b8ac384e8bd9c20d06674c3,
     type: 3}
   health: 0

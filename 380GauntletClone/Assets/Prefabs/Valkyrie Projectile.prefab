@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4600776599055053895}
   - component: {fileID: 5237506691495790804}
   - component: {fileID: 3147563156709421338}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Valkyrie Projectile
   m_TagString: ValkyrieP
   m_Icon: {fileID: 0}

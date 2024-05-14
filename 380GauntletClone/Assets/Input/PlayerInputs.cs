@@ -151,10 +151,21 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5191cdf0-63c9-4e93-bbd5-a4f981f58afe"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<DualShockGamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller1"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03a51e78-f730-459f-985e-25216f14c93f"",
+                    ""path"": ""<XInputController>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -201,10 +212,21 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d4060451-dcff-4018-a17d-f49b213c0778"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<DualShockGamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller1"",
+                    ""action"": ""PlayerAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1636686-ea8a-4b1c-9890-6a030865872a"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
                     ""action"": ""PlayerAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -241,6 +263,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GP2Join"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2aa0f9f-73e6-459c-81be-f8869276cb8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -269,11 +300,22 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ee448626-2580-4cac-87e9-2369fd3e93dc"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller1"",
                     ""action"": ""GP1Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d3c4107-74b4-4e7f-9003-7037bd7b1b4a"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""GP2Join"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -308,7 +350,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             ""bindingGroup"": ""Controller1"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<Gamepad>"",
+                    ""devicePath"": ""<DualShockGamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Controller2"",
+            ""bindingGroup"": ""Controller2"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<XInputController>"",
                     ""isOptional"": true,
                     ""isOR"": false
                 }
@@ -327,6 +380,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Join_WASDJoin = m_Join.FindAction("WASDJoin", throwIfNotFound: true);
         m_Join_ArrowJoin = m_Join.FindAction("ArrowJoin", throwIfNotFound: true);
         m_Join_GP1Join = m_Join.FindAction("GP1Join", throwIfNotFound: true);
+        m_Join_GP2Join = m_Join.FindAction("GP2Join", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -483,6 +537,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Join_WASDJoin;
     private readonly InputAction m_Join_ArrowJoin;
     private readonly InputAction m_Join_GP1Join;
+    private readonly InputAction m_Join_GP2Join;
     public struct JoinActions
     {
         private @PlayerInputs m_Wrapper;
@@ -490,6 +545,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @WASDJoin => m_Wrapper.m_Join_WASDJoin;
         public InputAction @ArrowJoin => m_Wrapper.m_Join_ArrowJoin;
         public InputAction @GP1Join => m_Wrapper.m_Join_GP1Join;
+        public InputAction @GP2Join => m_Wrapper.m_Join_GP2Join;
         public InputActionMap Get() { return m_Wrapper.m_Join; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -508,6 +564,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @GP1Join.started += instance.OnGP1Join;
             @GP1Join.performed += instance.OnGP1Join;
             @GP1Join.canceled += instance.OnGP1Join;
+            @GP2Join.started += instance.OnGP2Join;
+            @GP2Join.performed += instance.OnGP2Join;
+            @GP2Join.canceled += instance.OnGP2Join;
         }
 
         private void UnregisterCallbacks(IJoinActions instance)
@@ -521,6 +580,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @GP1Join.started -= instance.OnGP1Join;
             @GP1Join.performed -= instance.OnGP1Join;
             @GP1Join.canceled -= instance.OnGP1Join;
+            @GP2Join.started -= instance.OnGP2Join;
+            @GP2Join.performed -= instance.OnGP2Join;
+            @GP2Join.canceled -= instance.OnGP2Join;
         }
 
         public void RemoveCallbacks(IJoinActions instance)
@@ -565,6 +627,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_Controller1SchemeIndex];
         }
     }
+    private int m_Controller2SchemeIndex = -1;
+    public InputControlScheme Controller2Scheme
+    {
+        get
+        {
+            if (m_Controller2SchemeIndex == -1) m_Controller2SchemeIndex = asset.FindControlSchemeIndex("Controller2");
+            return asset.controlSchemes[m_Controller2SchemeIndex];
+        }
+    }
     public interface IMoveActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -578,5 +649,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnWASDJoin(InputAction.CallbackContext context);
         void OnArrowJoin(InputAction.CallbackContext context);
         void OnGP1Join(InputAction.CallbackContext context);
+        void OnGP2Join(InputAction.CallbackContext context);
     }
 }

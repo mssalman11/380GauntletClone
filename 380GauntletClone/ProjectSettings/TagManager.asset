@@ -9,15 +9,17 @@ TagManager:
   - ValkyrieP
   - WizardP
   - ElfP
+  - Key
+  - Door
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walls
   - Water
   - UI
-  - 
-  - 
+  - Projectiles
+  - Player
   - 
   - 
   - 
