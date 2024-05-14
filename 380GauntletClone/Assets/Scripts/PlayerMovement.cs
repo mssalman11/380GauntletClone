@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : PlayerSubject
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -132,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
         {
             keys += 1;
             Destroy(collision.gameObject);
+            NotifyObserver(PlayerActions.gotKey);
         }
         if (collision.gameObject.tag == "Door")
         {

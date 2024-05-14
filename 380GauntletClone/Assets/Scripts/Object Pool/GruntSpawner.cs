@@ -56,7 +56,8 @@ public class GruntSpawner : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("WarriorP"))
+        if (collision.gameObject.CompareTag("WarriorP") || collision.gameObject.CompareTag("ElfP") || collision.gameObject.CompareTag("ValkyrieP")
+            || collision.gameObject.CompareTag("WizardP"))
         {
             this.gameObject.SetActive(false);
         }

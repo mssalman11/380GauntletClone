@@ -28,12 +28,26 @@ public class Grunts : EnemyBev
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("WarriorP"))
+        if (other.CompareTag("Player") || other.CompareTag("WarriorP") ||
+            other.CompareTag("ElfP") || other.CompareTag("ValkyrieP") ||
+            other.CompareTag("WizardP"))
         {
             base.Die();
-            enemyHealth = 5;
+            enemyHealth = 10;
+
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("WarriorP") ||
+            collision.gameObject.CompareTag("ElfP") || collision.gameObject.CompareTag("ValkyrieP") ||
+            collision.gameObject.CompareTag("WizardP"))
+        {
+            base.Die();
+            enemyHealth = 10;
         }
     }
 }

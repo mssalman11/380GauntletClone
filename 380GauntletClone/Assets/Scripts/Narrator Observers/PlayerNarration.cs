@@ -10,6 +10,7 @@ public class PlayerNarration : MonoBehaviour, IObserver
     [SerializeField]
     GameObject _gotKeyUIElement;
 
+    /*
     [SerializeField]
     GameObject _gotFoodUIElement;
 
@@ -18,6 +19,7 @@ public class PlayerNarration : MonoBehaviour, IObserver
 
     [SerializeField]
     GameObject _gotHitUIElement;
+    */
 
     public void OnNotify(PlayerActions action)
     {
@@ -27,6 +29,7 @@ public class PlayerNarration : MonoBehaviour, IObserver
             _gotKeyUIElement.SetActive(true);
         }
 
+        /*
         if (action == PlayerActions.gotTreasure)
         {
             Debug.Log("Key Picked Up");
@@ -47,6 +50,7 @@ public class PlayerNarration : MonoBehaviour, IObserver
             Debug.Log("Key Picked Up");
             _gotFoodUIElement.SetActive(true);
         }
+        */
 
     }
 

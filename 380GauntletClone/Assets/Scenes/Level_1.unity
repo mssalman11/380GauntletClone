@@ -3516,6 +3516,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949362954}
   m_CullTransparentMesh: 1
+--- !u!1 &954946599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954946601}
+  - component: {fileID: 954946600}
+  m_Layer: 0
+  m_Name: PlayerNarration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &954946600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954946599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a77fad7859d9fb499afeda3abb0fd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSubject: {fileID: 2810687356989104788, guid: e542c1fdd03332b4cb26e994d378115e,
+    type: 3}
+  _playerSubject2: {fileID: 2810687356989104788, guid: 97e949ec0e15ffe4f93b41d73ea267d4,
+    type: 3}
+  _playerSubject3: {fileID: 2810687356989104788, guid: aa22f4f54d3a1d2488deb61f4a69badc,
+    type: 3}
+  _playerSubject4: {fileID: 2810687356989104788, guid: d7c61c8372ad93644946a397641b4a6f,
+    type: 3}
+  _gotKeyUIElement: {fileID: 1607504336}
+  _gotFoodUIElement: {fileID: 0}
+  _gotTreasureUIElement: {fileID: 0}
+  _gotHitUIElement: {fileID: 0}
+--- !u!4 &954946601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954946599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &982957489
 GameObject:
   m_ObjectHideFlags: 0
@@ -7548,3 +7604,4 @@ SceneRoots:
   - {fileID: 819797758}
   - {fileID: 290607148}
   - {fileID: 1165913761}
+  - {fileID: 954946601}
