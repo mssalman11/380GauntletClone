@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Grunt")
         {
             Debug.Log("Hit By Enemy");
             health -= 5;

@@ -27,5 +27,13 @@ public class Grunts : EnemyBev
             enemyHealth = 10;
         }
     }
-   
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("WarriorP"))
+        {
+            base.Die();
+            enemyHealth = 5;
+        }
+    }
 }

@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 30488ad7ae2f1a644853f00937c2cc43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,7 +132,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &3709540586662488698
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 10
   enemyDamage: 1
-  speed: 1
+  speed: 0.5
   TESTPLAYER: {fileID: 0}
   test: 1
   distance: {x: 0, y: 0, z: 0}
