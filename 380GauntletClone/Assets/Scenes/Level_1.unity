@@ -2481,7 +2481,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 206861944}
   - {fileID: 575937497}
-  timebetweenSpawns: 5
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 3709540586662488698, guid: 0bb675c985d039b4c9c743ddec0d59e3,
     type: 3}
 --- !u!65 &819797755
@@ -3477,7 +3477,7 @@ MonoBehaviour:
   - {fileID: 1772821040}
   - {fileID: 1043109346}
   - {fileID: 491583249}
-  timebetweenSpawns: 5
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 2263369135757086634, guid: 4a59f1b9d2e79c54cbd53026fbbf9ec3,
     type: 3}
 --- !u!1 &1043109345

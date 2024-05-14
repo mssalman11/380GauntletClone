@@ -1060,7 +1060,7 @@ MonoBehaviour:
   - {fileID: 1814197199}
   - {fileID: 1022543611}
   - {fileID: 1917855338}
-  timebetweenSpawns: 3
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 2263369135757086634, guid: 4a59f1b9d2e79c54cbd53026fbbf9ec3,
     type: 3}
 --- !u!65 &254810942
@@ -2528,7 +2528,7 @@ MonoBehaviour:
   - {fileID: 570457472}
   - {fileID: 1501757532}
   - {fileID: 1999917208}
-  timebetweenSpawns: 3
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 2263369135757086634, guid: 4a59f1b9d2e79c54cbd53026fbbf9ec3,
     type: 3}
 --- !u!65 &434824940
@@ -4561,7 +4561,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1184352306}
   - {fileID: 585300469}
-  timebetweenSpawns: 3
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 3709540586662488698, guid: 0bb675c985d039b4c9c743ddec0d59e3,
     type: 3}
 --- !u!65 &909957003
@@ -8361,7 +8361,7 @@ MonoBehaviour:
   - {fileID: 1063399278}
   - {fileID: 534658518}
   - {fileID: 1420429593}
-  timebetweenSpawns: 3
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 2263369135757086634, guid: 4a59f1b9d2e79c54cbd53026fbbf9ec3,
     type: 3}
 --- !u!65 &1809396403
@@ -10757,7 +10757,7 @@ MonoBehaviour:
   - {fileID: 1955835254}
   - {fileID: 1920617273}
   - {fileID: 368323463}
-  timebetweenSpawns: 3
+  timebetweenSpawns: 2
   enemyPrefab: {fileID: 2263369135757086634, guid: 4a59f1b9d2e79c54cbd53026fbbf9ec3,
     type: 3}
 --- !u!65 &2039623469
