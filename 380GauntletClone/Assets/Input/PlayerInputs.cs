@@ -35,6 +35,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PlayerAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""493d1393-98cd-442a-86ee-d0f8d1b3e346"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -169,27 +178,10 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Attack"",
-            ""id"": ""6ed3aaa8-c3c5-4804-b61a-8a4d4b49494b"",
-            ""actions"": [
-                {
-                    ""name"": ""PlayerAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""bf80549a-c572-448b-88fc-57e82b3dc3c1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""8490218f-326c-49dd-a2b9-7f9a9b3d8433"",
+                    ""id"": ""135d072b-efae-4c0a-bd11-14b60ac6a247"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -200,7 +192,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""05e7bc06-ed7d-460f-a241-a087b3c6ef37"",
+                    ""id"": ""99d9a79a-f521-474c-a0d2-de25a2790414"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -211,7 +203,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d4060451-dcff-4018-a17d-f49b213c0778"",
+                    ""id"": ""0eb1d201-edf8-4f23-b490-ace653b11728"",
                     ""path"": ""<DualShockGamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -222,7 +214,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f1636686-ea8a-4b1c-9890-6a030865872a"",
+                    ""id"": ""7f002df4-b849-4eda-acf7-8e712750e598"",
                     ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -372,9 +364,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // Move
         m_Move = asset.FindActionMap("Move", throwIfNotFound: true);
         m_Move_Movement = m_Move.FindAction("Movement", throwIfNotFound: true);
-        // Attack
-        m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
-        m_Attack_PlayerAttack = m_Attack.FindAction("PlayerAttack", throwIfNotFound: true);
+        m_Move_PlayerAttack = m_Move.FindAction("PlayerAttack", throwIfNotFound: true);
         // Join
         m_Join = asset.FindActionMap("Join", throwIfNotFound: true);
         m_Join_WASDJoin = m_Join.FindAction("WASDJoin", throwIfNotFound: true);
@@ -443,11 +433,13 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Move;
     private List<IMoveActions> m_MoveActionsCallbackInterfaces = new List<IMoveActions>();
     private readonly InputAction m_Move_Movement;
+    private readonly InputAction m_Move_PlayerAttack;
     public struct MoveActions
     {
         private @PlayerInputs m_Wrapper;
         public MoveActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Move_Movement;
+        public InputAction @PlayerAttack => m_Wrapper.m_Move_PlayerAttack;
         public InputActionMap Get() { return m_Wrapper.m_Move; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -460,6 +452,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @PlayerAttack.started += instance.OnPlayerAttack;
+            @PlayerAttack.performed += instance.OnPlayerAttack;
+            @PlayerAttack.canceled += instance.OnPlayerAttack;
         }
 
         private void UnregisterCallbacks(IMoveActions instance)
@@ -467,6 +462,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @PlayerAttack.started -= instance.OnPlayerAttack;
+            @PlayerAttack.performed -= instance.OnPlayerAttack;
+            @PlayerAttack.canceled -= instance.OnPlayerAttack;
         }
 
         public void RemoveCallbacks(IMoveActions instance)
@@ -484,52 +482,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         }
     }
     public MoveActions @Move => new MoveActions(this);
-
-    // Attack
-    private readonly InputActionMap m_Attack;
-    private List<IAttackActions> m_AttackActionsCallbackInterfaces = new List<IAttackActions>();
-    private readonly InputAction m_Attack_PlayerAttack;
-    public struct AttackActions
-    {
-        private @PlayerInputs m_Wrapper;
-        public AttackActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PlayerAttack => m_Wrapper.m_Attack_PlayerAttack;
-        public InputActionMap Get() { return m_Wrapper.m_Attack; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(AttackActions set) { return set.Get(); }
-        public void AddCallbacks(IAttackActions instance)
-        {
-            if (instance == null || m_Wrapper.m_AttackActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_AttackActionsCallbackInterfaces.Add(instance);
-            @PlayerAttack.started += instance.OnPlayerAttack;
-            @PlayerAttack.performed += instance.OnPlayerAttack;
-            @PlayerAttack.canceled += instance.OnPlayerAttack;
-        }
-
-        private void UnregisterCallbacks(IAttackActions instance)
-        {
-            @PlayerAttack.started -= instance.OnPlayerAttack;
-            @PlayerAttack.performed -= instance.OnPlayerAttack;
-            @PlayerAttack.canceled -= instance.OnPlayerAttack;
-        }
-
-        public void RemoveCallbacks(IAttackActions instance)
-        {
-            if (m_Wrapper.m_AttackActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IAttackActions instance)
-        {
-            foreach (var item in m_Wrapper.m_AttackActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_AttackActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public AttackActions @Attack => new AttackActions(this);
 
     // Join
     private readonly InputActionMap m_Join;
@@ -639,9 +591,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IMoveActions
     {
         void OnMovement(InputAction.CallbackContext context);
-    }
-    public interface IAttackActions
-    {
         void OnPlayerAttack(InputAction.CallbackContext context);
     }
     public interface IJoinActions

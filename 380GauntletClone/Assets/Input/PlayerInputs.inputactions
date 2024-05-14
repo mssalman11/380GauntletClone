@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PlayerAttack",
+                    "type": "Button",
+                    "id": "493d1393-98cd-442a-86ee-d0f8d1b3e346",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -147,27 +156,10 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Attack",
-            "id": "6ed3aaa8-c3c5-4804-b61a-8a4d4b49494b",
-            "actions": [
-                {
-                    "name": "PlayerAttack",
-                    "type": "Button",
-                    "id": "bf80549a-c572-448b-88fc-57e82b3dc3c1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "8490218f-326c-49dd-a2b9-7f9a9b3d8433",
+                    "id": "135d072b-efae-4c0a-bd11-14b60ac6a247",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -178,7 +170,7 @@
                 },
                 {
                     "name": "",
-                    "id": "05e7bc06-ed7d-460f-a241-a087b3c6ef37",
+                    "id": "99d9a79a-f521-474c-a0d2-de25a2790414",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
@@ -189,7 +181,7 @@
                 },
                 {
                     "name": "",
-                    "id": "d4060451-dcff-4018-a17d-f49b213c0778",
+                    "id": "0eb1d201-edf8-4f23-b490-ace653b11728",
                     "path": "<DualShockGamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
@@ -200,7 +192,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f1636686-ea8a-4b1c-9890-6a030865872a",
+                    "id": "7f002df4-b849-4eda-acf7-8e712750e598",
                     "path": "<XInputController>/rightTrigger",
                     "interactions": "",
                     "processors": "",

@@ -5,11 +5,11 @@ using UnityEngine;
 public class ProjectileMovement : MonoBehaviour
 {
     Renderer m_Renderer;
-
     private void Awake()
     {
         m_Renderer = GetComponent<Renderer>();  
         StartCoroutine(DestroyAfterCreate());
+
     }
 
     IEnumerator DestroyAfterCreate()
@@ -28,6 +28,17 @@ public class ProjectileMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (gameObject.CompareTag("WarriorP"))
+                PlayerScores.WarriorScore += 10;
+            if (gameObject.CompareTag("ValkyrieP"))
+                PlayerScores.ValkyrieScore += 10;
+            if (gameObject.CompareTag("WizardP"))
+                PlayerScores.WizardScore += 10;
+            if (gameObject.CompareTag("ElfP"))
+                PlayerScores.ElfScore += 10;
 
+        }
     }
 }

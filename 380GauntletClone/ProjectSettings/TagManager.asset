@@ -11,6 +11,8 @@ TagManager:
   - ElfP
   - Key
   - Door
+  - Health
+  - SceneExit
   layers:
   - Default
   - TransparentFX
