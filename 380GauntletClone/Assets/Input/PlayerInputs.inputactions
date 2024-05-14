@@ -167,6 +167,17 @@
                 },
                 {
                     "name": "",
+                    "id": "05e7bc06-ed7d-460f-a241-a087b3c6ef37",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ArrowKey",
+                    "action": "PlayerAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d4060451-dcff-4018-a17d-f49b213c0778",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",

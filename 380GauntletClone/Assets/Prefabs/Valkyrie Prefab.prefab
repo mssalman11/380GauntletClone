@@ -114,11 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 4
-  projectilePrefab: {fileID: 3663770884729502141, guid: 87d5c8bff99531f43a36288567f9cdfc,
+  projectilePrefab: {fileID: 3663770884729502141, guid: 11f024d92b8ac384e8bd9c20d06674c3,
     type: 3}
   health: 0
   playerArmor: 0
   hasArmor: 0
+  controlSchemeName: ArrowKey
+  playerHealth: {fileID: 0}
+  playerScore: {fileID: 0}
+  playerJoin: {fileID: 0}
+  scoreText: {fileID: 0}
+  healthText: {fileID: 0}
+  characterName: Valkyrie
 --- !u!33 &2630322780191217263
 MeshFilter:
   m_ObjectHideFlags: 0

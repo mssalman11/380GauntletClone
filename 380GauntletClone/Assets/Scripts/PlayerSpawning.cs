@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpawning : MonoBehaviour
 {
-    //public PlayerInputManager inputManager;
-    //[SerializeField] private GameObject currentPrefab;
     [SerializeField] private GameObject warriorPrefab;
     [SerializeField] private GameObject valkyriePrefab;
     [SerializeField] private GameObject wizardPrefab;

@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - WarriorP
+  - ValkyrieP
+  - WizardP
+  - ElfP
   layers:
   - Default
   - TransparentFX

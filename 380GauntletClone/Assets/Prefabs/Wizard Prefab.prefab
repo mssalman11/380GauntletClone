@@ -114,11 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 4
-  projectilePrefab: {fileID: 3663770884729502141, guid: 87d5c8bff99531f43a36288567f9cdfc,
+  projectilePrefab: {fileID: 3663770884729502141, guid: af330f80c37be914886910c79c8a520c,
     type: 3}
   health: 0
   playerArmor: 0
   hasArmor: 0
+  controlSchemeName: Controller1
+  playerHealth: {fileID: 0}
+  playerScore: {fileID: 0}
+  playerJoin: {fileID: 0}
+  scoreText: {fileID: 0}
+  healthText: {fileID: 0}
+  characterName: Wizard
 --- !u!33 &2630322780191217263
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8131462717054123453}
   - component: {fileID: -4673383919910041780}
   m_Layer: 0
-  m_Name: Warrior Prefab
+  m_Name: Elf Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,18 +114,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 4
-  projectilePrefab: {fileID: 3663770884729502141, guid: 5acf543c885116f498359d19bff3337f,
+  projectilePrefab: {fileID: 3663770884729502141, guid: c6720e761fcb65d468afc5c1f449e40b,
     type: 3}
   health: 0
   playerArmor: 0
   hasArmor: 0
-  controlSchemeName: Keyboard
+  controlSchemeName: 
   playerHealth: {fileID: 0}
   playerScore: {fileID: 0}
   playerJoin: {fileID: 0}
   scoreText: {fileID: 0}
   healthText: {fileID: 0}
-  characterName: Warrior
+  characterName: Elf
 --- !u!33 &2630322780191217263
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2cb5fff39bf32e41957f9d8fde215f9, type: 2}
+  - {fileID: 2100000, guid: b65bcb3f45c316344b7d65217b62f670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
