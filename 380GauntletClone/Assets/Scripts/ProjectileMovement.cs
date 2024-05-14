@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//This script handles whether or not the projectile is destroyed after a couple of seconds.
 public class ProjectileMovement : MonoBehaviour
 {
     Renderer m_Renderer;
@@ -26,6 +26,7 @@ public class ProjectileMovement : MonoBehaviour
         }
     }
 
+    //Based on what tag the parent object has, add score to particular player
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")

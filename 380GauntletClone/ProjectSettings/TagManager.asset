@@ -13,6 +13,8 @@ TagManager:
   - Door
   - Health
   - SceneExit
+  - Grunt
+  - Treasure
   layers:
   - Default
   - TransparentFX
@@ -22,8 +24,8 @@ TagManager:
   - UI
   - Projectiles
   - Player
-  - 
-  - 
+  - CameraBounds
+  - Enemy
   - 
   - 
   - 
