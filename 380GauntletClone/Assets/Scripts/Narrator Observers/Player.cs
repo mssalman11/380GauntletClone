@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : PlayerSubject
 {
+
+    int count;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +30,20 @@ public class Player : PlayerSubject
             NotifyObserver(PlayerActions.gotFood);
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            NotifyObserver(PlayerActions.gotHit);
+            count++;
+            if (count == 1)
+            {
+                NotifyObserver(PlayerActions.gotHit);
+            }
+            
+
         }
     }
 }

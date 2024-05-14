@@ -37,6 +37,8 @@ public class PlayerNarration : MonoBehaviour, IObserver
         {
             Debug.Log("Key Picked Up");
             _gotHitUIElement.SetActive(true);
+            _gotHitUIElement.SetActive(false);
+
         }
 
         if (action == PlayerActions.gotFood)
