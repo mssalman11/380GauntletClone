@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
 
     private float lastSpawnTime;
 
-    [SerializeField] private Grunts enemyPrefab;
+    [SerializeField] private Ghosts enemyPrefab;
 
     private IObjectPool<EnemyBev> enemyPool;
 
@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
 
     private EnemyBev CreateEnemy()
     {
-        Grunts enemy = Instantiate(enemyPrefab);
+        Ghosts enemy = Instantiate(enemyPrefab);
         enemy.SetPool(enemyPool);
         return enemy;
     }
@@ -51,6 +51,14 @@ public class Spawner : MonoBehaviour
         {
             enemyPool.Get();
             lastSpawnTime = Time.time + timebetweenSpawns;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("WarriorP"))
+        {
+            this.gameObject.SetActive(false);
         }
     }
 }

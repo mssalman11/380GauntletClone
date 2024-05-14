@@ -27,11 +27,10 @@ public class EnemyBev : MonoBehaviour
     public bool test;
     public Vector3 distance;
 
-    private void Start()
+    private void Awake()
     {
-        TESTPLAYER = FindObjectOfType<Player>().transform;
+        TESTPLAYER = FindObjectOfType<PlayerMovement>().transform;
     }
-
 
     private void FixedUpdate()
     {
@@ -67,4 +66,5 @@ public class EnemyBev : MonoBehaviour
     {
         enemyPool.Release(this);
     }
+
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4495534759766691357}
   - component: {fileID: 2507293196345059146}
   - component: {fileID: 2263369135757086634}
-  - component: {fileID: 5429560454031318689}
+  - component: {fileID: 4342093673914337231}
   m_Layer: 0
   m_Name: Ghosts
   m_TagString: Enemy
@@ -121,11 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 5
   enemyDamage: 1
-  speed: 1
+  speed: 0.5
   TESTPLAYER: {fileID: 0}
   test: 1
   distance: {x: 0, y: 0, z: 0}
---- !u!54 &5429560454031318689
+--- !u!54 &4342093673914337231
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +135,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -150,5 +150,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 116
+  m_CollisionDetection: 1

@@ -5,11 +5,10 @@ using UnityEngine.Pool;
 
 public class Ghosts : EnemyBev
 {
-    
-    private void Start()
+    private void Awake()
     {
         enemyHealth = 5;
-        TESTPLAYER = FindObjectOfType<Player>().transform;
+        TESTPLAYER = FindObjectOfType<PlayerMovement>().transform;
     }
 
     private void setDifferentStats()
@@ -33,7 +32,7 @@ public class Ghosts : EnemyBev
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("WarriorP"))
         {
             base.Die();
             enemyHealth = 5;
@@ -43,7 +42,7 @@ public class Ghosts : EnemyBev
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("WarriorP"))
         {
             base.Die();
             enemyHealth = 5;
