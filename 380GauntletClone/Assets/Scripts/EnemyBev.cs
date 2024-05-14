@@ -10,12 +10,15 @@ public class EnemyBev : MonoBehaviour
 
     [SerializeField] protected int enemyDamage;
 
-    private IObjectPool<EnemyBev> enemyPool;
+    public IObjectPool<EnemyBev> enemyPool;
 
+    protected bool isDead;
+    
     public void SetPool(IObjectPool<EnemyBev> pool)
     {
         enemyPool = pool;
     }
+    
 
     [SerializeField]
     private float speed;
@@ -36,8 +39,6 @@ public class EnemyBev : MonoBehaviour
         {
             EnemyMove();
         }
-
-        DieWithNoHealth();
     }
 
     public virtual void EnemyMove()
@@ -50,46 +51,20 @@ public class EnemyBev : MonoBehaviour
         distance = TESTPLAYER.GetComponent<Transform>().position - GetComponent<Transform>().position;
 
         return distance;
-    } 
+    }
 
-
-    private void DieWithNoHealth()
+    
+    protected virtual void DieWithNoHealth()
     {
         if (enemyHealth < 0)
         {
             enemyPool.Release(this);
-            //enemyHealth = 20;
+            isDead = true;
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
-        if (enemyHealth < 0)
-        {
-            enemyPool.Release(this);
-            //enemyHealth = 20;
-        }
+        enemyPool.Release(this);
     }
-
-
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            enemyPool.Release(this);
-           
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            enemyPool.Release(this);
-            
-        }
-    }
-    */
-
 }

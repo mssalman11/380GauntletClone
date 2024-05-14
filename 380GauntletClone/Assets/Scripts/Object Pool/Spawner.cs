@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
 
     private float lastSpawnTime;
 
-    [SerializeField] private EnemyBev enemyPrefab;
+    [SerializeField] private Ghosts enemyPrefab;
 
     private IObjectPool<EnemyBev> enemyPool;
 
@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
 
     private EnemyBev CreateEnemy()
     {
-        EnemyBev enemy = Instantiate(enemyPrefab);
+        Ghosts enemy = Instantiate(enemyPrefab);
         enemy.SetPool(enemyPool);
         return enemy;
     }
